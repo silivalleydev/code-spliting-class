@@ -72,13 +72,15 @@ module.exports = (env, options) => {
 
           Webpack 공식 Doc에는 'all'을 쓰는 것을 권장
        */
-      //전체 애플리케이션에서 node_modules의 모든 코드를 포함하는 vendors 청크를 만드는 설정
       splitChunks: {
+        // cachegroups은 특정 조건으로 chunk를 생성하라고 webpack 명령을 내리는 것이다.
         cacheGroups: {
           commons: {
+            // node_modules를 포함하고
             test: /[\\/]node_modules[\\/]/,
+            // vendors라는 이름을 가진 번들코드 파일을 생성한다.
             name: 'vendors',
-            chunks: 'all' // 중복되는 코드를 제거한다
+            chunks: 'all'
           },
         },
       },
@@ -225,6 +227,7 @@ module.exports = (env, options) => {
         '@C': path.resolve(__dirname, 'src/components/'),
         '@COMMON': path.resolve(__dirname, 'src/components/common'),
         '@STYLE': path.resolve(__dirname, 'src/css'),
+        '@IMG': path.resolve(__dirname, 'assets/img'),
       },
     },
   };

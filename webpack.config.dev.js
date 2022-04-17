@@ -141,6 +141,7 @@ module.exports = (env, options) => {
         '@C': path.resolve(__dirname, 'src/components/'),
         '@COMMON': path.resolve(__dirname, 'src/components/common'),
         '@STYLE': path.resolve(__dirname, 'src/css'),
+        '@IMG': path.resolve(__dirname, 'assets/img'),
       },
     },
   };
