@@ -13,6 +13,8 @@ module.exports = (env, options) => {
     devtool: 'inline-source-map',
     output: {
       filename: '[name].[hash].js',
+      // 코드스플리팅한 파일들의 아웃풋 명을 설정한다.
+      chunkFilename: '[name].[chunkhash].chunk.js',
       path: path.resolve(
         __dirname + "/dev-build"
       ),
@@ -30,7 +32,26 @@ module.exports = (env, options) => {
               ['@babel/preset-env', {targets: {node: 'current'}}],
               ['@babel/preset-react', {targets: {node: 'current'}}]
             ],
-            plugins: ['react-hot-loader/babel'],
+            plugins: [
+              'react-hot-loader/babel',
+              /**
+               * Dynamic import
+               * 
+               * 첫 페이지 진입시에 필요한 최소한의 코드만 다운 받고, 
+               * 사용자가 특정 페이지나 위치에 도달할 때마다 코드를 로드 한다면, 
+               * 첫 페이지의 초기 성능을 올릴 수 있습니다.
+                 
+                이런 방식을 lazy-load, 게으른 로딩이라고 합니다.
+                  
+                이러한 방식을 적용하는 기술이 Dynamic Import 입니다,
+                다이내믹 임포트를 사용하면 런타임시에 필요한 module 을 import 할 수 있습니다.
+               *   
+                동작방식은 Build 시점에 import() 모듈을 chunk 파일로 만들며, 
+                필요한 시점에 header 에 script 를 세팅하여 JS 파일을 다운로드 합니다.
+               */
+              // 다이내믹 임포트를 적용하는것은 아래 플러그인을 적용하면됩니다.
+              '@babel/plugin-syntax-dynamic-import'
+            ],
             // 이 옵션은 캐싱결과를 ./node_modules/.cache/babel-loader/ 에 적재하고
             // 재 빌드 속도를 빠르게 해준다
             cacheDirectory: true
