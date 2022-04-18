@@ -69,8 +69,22 @@ module.exports = (env, options) => {
         {
           test: /\.css$/i,
           use: ["style-loader", "css-loader"],
+        },
+        {
+          // file-loader는 import/ require()로 가져온 파일들을 output으로 생성하는것.
+          test: /\.(png|jpe?g|gif|mp3|mp4|wav|wma|ogg|ttf|woff2|woff|eot|svg|ico)$/i,
+          use: [
+              {
+                  loader: 'file-loader',
+                  options: {
+                      // 전체 디렉토리 구조를 유지하며 파일을 내보내려면 다음처럼 하면된다.
+                      name: '[path][name].[ext]'
+                  },
+
+              },
+          ],
         }
-      ],
+      ]
     },
     plugins: [
       new CleanWebpackPlugin(),
@@ -141,7 +155,7 @@ module.exports = (env, options) => {
         '@C': path.resolve(__dirname, 'src/components/'),
         '@COMMON': path.resolve(__dirname, 'src/components/common'),
         '@STYLE': path.resolve(__dirname, 'src/css'),
-        '@IMG': path.resolve(__dirname, 'assets/img'),
+        '@IMG': path.resolve(__dirname, 'src/assets/img'),
       },
     },
   };
