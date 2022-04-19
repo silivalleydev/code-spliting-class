@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import {
     BrowserRouter,
     Routes,
@@ -6,7 +6,7 @@ import {
     Link
   } from "react-router-dom";
 import Main from '@C/Main';
-import CatPage from '@C/catPage/CatPage';
+const CatPage = lazy(() => import('@C/catPage/CatPage'));
 import { Switch } from 'react-router-dom';
 import Navigation from '@C/header/Navigation';
   
@@ -16,7 +16,9 @@ export default function Router() {
       <Navigation/>
       <Switch>
         <Route exact path="/" component={Main} />
-        <Route path="/cat" component={CatPage} />
+        <Suspense fallback={<div></div>}>
+          <Route path="/cat" component={CatPage} />
+        </Suspense>
         <Route component={Main} />
       </Switch>
     </BrowserRouter>
