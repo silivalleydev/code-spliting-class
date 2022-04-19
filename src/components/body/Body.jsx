@@ -2,7 +2,7 @@ import React, { lazy, Suspense, useState } from 'react'
 import CustomContainer from '@COMMON/CustomContainer';
 import Top from './top/Top'
 import Middle from './middle/Middle'
-const DogVisibleComponent = lazy(() => import('@COMMON/DogVisibleComponent'));
+const DogVisibleComponent = lazy(() => import(/* webpackChunkName: "dogVisibleComponent" */  '@COMMON/DogVisibleComponent'));
 
 export default function Body() {
   const [visible, setVisible] = useState(false);

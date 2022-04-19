@@ -6,7 +6,7 @@ import {
     Link
   } from "react-router-dom";
 import Main from '@C/Main';
-const CatPage = lazy(() => import('@C/catPage/CatPage'));
+const CatPage = lazy(() => import(/* webpackChunkName: "catPage" */ '@C/catPage/CatPage'));
 import { Switch } from 'react-router-dom';
 import Navigation from '@C/header/Navigation';
   
