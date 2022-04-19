@@ -5,7 +5,6 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const version = require('./package.json').version;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
 
@@ -200,12 +199,6 @@ module.exports = (env, options) => {
         DEF_MODE: JSON.stringify(options.mode),
         APP_VERSION: JSON.stringify(version),
       }),
-      // copy-webpack-plugin: 웹팩이 실행될 때 패키지 빌드 파일을 복사
-      // new CopyPlugin([{
-      //   // 어디에있는것을 복사하여 가져올지
-      //   from: './node_modules/axios/dist/axios.min.js',
-      //   to: './axios.min.js'
-      // }])
     ],
 
     /**
@@ -228,6 +221,7 @@ module.exports = (env, options) => {
         '@COMMON': path.resolve(__dirname, 'src/components/common'),
         '@STYLE': path.resolve(__dirname, 'src/css'),
         '@IMG': path.resolve(__dirname, 'src/assets/img'),
+        '@FUNC': path.resolve(__dirname, 'src/func'),
       },
     },
   };

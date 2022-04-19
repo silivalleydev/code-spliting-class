@@ -12,6 +12,13 @@ export default function Body() {
         <Top/>
         <Middle/>
         <button onClick={() => {
+          import (/* webpackChunkName: "alert" */ '@FUNC/alert')
+          .then((alert) => alert.dog())
+          .catch(() => console.log('fail'));
+        }}>
+          멍멍이 경고창
+        </button>
+        <button onClick={() => {
           setVisible(!visible);
         }}>
             {visible ? '강아지 닫기' : '강아지 열기'}
