@@ -9,3 +9,8 @@ npm i -D @babel/plugin-syntax-dynamic-import
 ```
 npm i react-router-dom@5.3.0
 ```
+
+- file-loader
+```
+npm i -D file-loader@6.2.0
+```
