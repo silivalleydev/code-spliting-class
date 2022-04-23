@@ -6,7 +6,7 @@ import {
     Link
   } from "react-router-dom";
 import Main from '@C/Main';
-const CatPage = lazy(() => import(/* webpackChunkName: "catPage" */ '@C/catPage/CatPage'));
+const Cat = lazy(() => import(/* webpackChunkName: "cat" */ '@C/cat/Cat'));
 import { Switch } from 'react-router-dom';
 import Navigation from '@C/header/Navigation';
   
@@ -15,10 +15,10 @@ export default function Router() {
     <BrowserRouter>
       <Navigation/>
       <Switch>
+      <Suspense fallback={<div></div>}>
         <Route exact path="/" component={Main} />
-        <Suspense fallback={<div></div>}>
-          <Route path="/cat" component={CatPage} />
-        </Suspense>
+        <Route path="/cat" component={Cat} />
+      </Suspense>
         <Route component={Main} />
       </Switch>
     </BrowserRouter>
